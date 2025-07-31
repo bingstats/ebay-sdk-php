@@ -1,6 +1,6 @@
 {
-    "name": "benmorel/ebay-sdk-php",
-    "description": "An eBay SDK for PHP. Fork of dts/ebay-sdk-php with support for PHP 8.",
+    "name": "bingstats/ebay-sdk-php",
+    "description": "An eBay SDK for PHP. Fork of benmorel/ebay-sdk-php with support for PHP 8.",
     "keywords": ["ebay", "api", "sdk"],
     "type": "library",
     "license": "(Apache-2.0 and MIT)",
