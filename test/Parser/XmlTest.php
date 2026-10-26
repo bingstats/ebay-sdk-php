@@ -110,4 +110,28 @@ class XmlTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('token type', $obj->tokenType->value);
         $this->assertEquals('uri type', $obj->uriType->value);
     }
+
+    public function testCanParseXmlWithoutDeprecations()
+    {
+        set_error_handler(function ($severity, $message, $file, $line) {
+            if ($severity === E_DEPRECATED) {
+                throw new \ErrorException($message, 0, $severity, $file, $line);
+            }
+
+            return false;
+        });
+
+        try {
+            $xmlParser = new XmlParser('\DTS\eBaySDK\Test\Mocks\ComplexClass');
+            $xml = file_get_contents(__DIR__ . '/../Mocks/Response.xml');
+            $xml = preg_replace('/[\n\r]/', '', $xml);
+            $xml = preg_replace('/>\s+/', '>', $xml);
+            $obj = $xmlParser->parse($xml);
+        } finally {
+            restore_error_handler();
+        }
+
+        $this->assertInstanceOf('\DTS\eBaySDK\Test\Mocks\ComplexClass', $obj);
+    }
+
 }
