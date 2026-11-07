@@ -46,10 +46,7 @@ class XmlParser
         xml_parser_set_option($parser, XML_OPTION_SKIP_WHITE, 1);
         xml_set_element_handler($parser, [$this, 'startElement'], [$this, 'endElement']);
         xml_set_character_data_handler($parser, [$this, 'cdata']);
-
         xml_parse($parser, $xml, true);
-
-        xml_parser_free($parser);
 
         return $this->rootObject;
     }
